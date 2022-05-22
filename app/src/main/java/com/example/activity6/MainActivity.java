@@ -18,6 +18,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.activity6.adapter.TemanAdapter;
 import com.example.activity6.database.DBController;
+import com.example.activity6.database.EditTeman;
 import com.example.activity6.database.Teman;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -31,7 +32,7 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private TemanAdapter adapter;
-    private ArrayList<Teman>temanArrayList;
+    private ArrayList<Teman>temanArrayList = new ArrayList<>();
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static String url_select = "https://10.0.2.2/umyTI/bacateman.php";
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
         fab = findViewById(R.id.floatingBtn);
+
         BacaData();
         adapter = new TemanAdapter(temanArrayList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
@@ -58,14 +60,15 @@ public class MainActivity extends AppCompatActivity {
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,TemanBaru.class);
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, EditTeman.class);
                 startActivity(intent);
             }
         });
     }
 
     public void BacaData(){
+        temanArrayList.clear();
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         JsonArrayRequest jArr = new JsonArrayRequest(url_select, new Response.Listener<JSONArray>() {
             @Override
@@ -79,12 +82,13 @@ public class MainActivity extends AppCompatActivity {
                         item.setId(obj.getString(TAG_ID));
                         item.setNama(obj.getString(TAG_NAMA));
                         item.setTelpon(obj.getString(TAG_TELPON));
-                        //mnambah item ke array
+                        //menambah item ke array
                         temanArrayList.add(item);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
+                adapter.notifyDataSetChanged();
             }
         }, new Response.ErrorListener() {
             @Override

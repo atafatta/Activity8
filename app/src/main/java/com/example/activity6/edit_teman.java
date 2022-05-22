@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.activity6.database.DBController;
@@ -13,8 +14,8 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.HashMap;
 
-public class edit_teman extends AppCompatActivity {
-    TextInputEditText Nama,Telpon;
+public class    edit_teman extends AppCompatActivity {
+    EditText Nama,Telpon;
 
     Button Save;
 
@@ -28,7 +29,7 @@ public class edit_teman extends AppCompatActivity {
         setContentView(R.layout.activity_edit_teman2);
 
         Nama = findViewById(R.id.edtNama);
-        Telpon = findViewById(R.id.edtTelp);
+        Telpon = findViewById(R.id.editTlpp);
         Save = findViewById(R.id.ubahButton);
 
         id = getIntent().getStringExtra("id");
