@@ -14,7 +14,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.HashMap;
 
-public class    edit_teman extends AppCompatActivity {
+public class edit_teman extends AppCompatActivity {
     EditText Nama,Telpon;
 
     Button Save;
